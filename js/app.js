@@ -48,7 +48,7 @@ var Player=function(){
 }
 
 Player.prototype.update=function (dt) {
-  if(player.y<20){
+  if(this.y<20){
     score++;
   	document.getElementById('playerScore').innerHTML = score;
     this.reset();
