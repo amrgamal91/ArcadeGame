@@ -1,3 +1,4 @@
+"use strict";
 // Sets an initial player score of 0.
 var score = 0;
 document.getElementById('playerScore').innerHTML = score;
@@ -37,6 +38,7 @@ Enemy.prototype.update = function(dt) {
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
+
 
 // Now write your own player class
 // This class requires an update(), render() and
@@ -80,16 +82,31 @@ Player.prototype.handleInput = function (direction) {
 Player.prototype.reset = function() {
     this.x = 200;
     this.y = 380;
+    SetEnemies();
 };
 // Now instantiate your objects.
-var enemy1 = new Enemy(-90, 60);
-var enemy2 = new Enemy(-190, 140);
-var enemy3 = new Enemy(-290, 230);
-var enemy4 = new Enemy(-390, 140);
-var enemy5 = new Enemy(-490, 60);
-var enemy6 = new Enemy(-890, 230);
+// var enemy1 = new Enemy(-90, 60);
+// var enemy2 = new Enemy(-190, 140);
+// var enemy3 = new Enemy(-290, 230);
+// var enemy4 = new Enemy(-390, 140);
+// var enemy5 = new Enemy(-490, 60);
+// var enemy6 = new Enemy(-890, 230);
+
+var allEnemies;
+var x_pos=[-90,-190,-290,-390,-490,-690];
+var y_pos=[60,140,230,180,90];
+function SetEnemies(){
+  allEnemies=[];
+  for(var i=0;i<6;i++){
+    var x= x_pos[Math.floor(Math.random() * x_pos.length)];
+    var y= y_pos[Math.floor(Math.random() * y_pos.length)];
+    var enemy=new Enemy(x,y);
+    allEnemies.push(enemy);
+  }
+}
+SetEnemies();
 // Place all enemy objects in an array called allEnemies
-var allEnemies = [enemy1, enemy2, enemy3, enemy4, enemy5, enemy6];
+// var allEnemies = [enemy1, enemy2, enemy3, enemy4, enemy5, enemy6];
 // Place the player object in a variable called player
 var player = new Player();
 
